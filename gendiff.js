@@ -1,9 +1,13 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { getDataFromFile } from './src/parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
-  return `Comparing ${filepath1} and ${filepath2}`;
+  const data1 = getDataFromFile(filepath1);
+  const data2 = getDataFromFile(filepath2);
+  
+  return `Comparing ${filepath1} and ${filepath2}\nData1: ${JSON.stringify(data1)}\nData2: ${JSON.stringify(data2)}`;
 };
 
 const program = new Command();
