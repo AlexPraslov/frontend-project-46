@@ -18,8 +18,8 @@
     "gendiff": "gendiff.js"
   },
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-    "lint": "eslint ."
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "lint": "npx eslint ."
   },
   "dependencies": {
     "commander": "^14.0.1",
