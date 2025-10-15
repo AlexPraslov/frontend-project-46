@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const getAbsolutePath = (filepath) => {
-  return path.resolve(process.cwd(), filepath);
-};
+const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const readFile = (filepath) => {
   const absolutePath = getAbsolutePath(filepath);
@@ -19,12 +17,12 @@ const parseData = (data, format) => {
   }
 };
 
-const getFormat = (filename) => {
-  return path.extname(filename).slice(1);
-};
+const getFormat = (filename) => path.extname(filename).slice(1);
 
-export const getDataFromFile = (filepath) => {
+const getDataFromFile = (filepath) => {
   const data = readFile(filepath);
   const format = getFormat(filepath);
   return parseData(data, format);
 };
+
+export default getDataFromFile;

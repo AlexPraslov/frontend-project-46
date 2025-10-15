@@ -18,10 +18,19 @@
     "gendiff": "gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "lint": "eslint ."
   },
   "dependencies": {
     "commander": "^14.0.1",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "jest": "^30.2.0"
   }
+
+  
 }
