@@ -2,10 +2,10 @@ install:
 	npm install
 
 lint:
-	npx eslint .
+	npm run lint
 
 test:
 	NODE_OPTIONS=--experimental-vm-modules npx jest --coverage
 
-test-no-coverage:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+test-watch:
+	npx jest --watch

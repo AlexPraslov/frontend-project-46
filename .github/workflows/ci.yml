@@ -9,6 +9,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - run: npm install
-      - run: npm run lint
-      - run: npm test
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run linter
+        run: sudo npx eslint .
+      
+      - name: Run tests
+        run: sudo npx jest --coverage
+        env:
+          NODE_OPTIONS: "--experimental-vm-modules"

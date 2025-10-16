@@ -1,5 +1,6 @@
 import { fileURLToPath } from 'url';
 import path from 'path';
+import { test, expect } from '@jest/globals';
 import genDiff from '../gendiff.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -16,4 +17,6 @@ test('flat JSON files comparison', () => {
   expect(result).toContain('- timeout: 50');
   expect(result).toContain('+ timeout: 20');
   expect(result).toContain('+ verbose: true');
+  expect(result).toContain('- proxy: 123.234.53.22');
+  expect(result).toContain('- follow: false');
 });
