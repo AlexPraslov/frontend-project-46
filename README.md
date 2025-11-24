@@ -4,3 +4,7 @@
 ### Демонстрация работы gendiff
 
 [![asciicast](https://asciinema.org/a/duytKSkTSvp4Th5RCWRQBjHRw)](https://asciinema.org/a/duytKSkTSvp4Th5RCWRQBjHRw)
+
+## CI Status
+
+[![CI](https://github.com/AlexPraslov/frontend-project-46/actions/workflows/ci.yml/badge.svg)](https://github.com/AlexPraslov/frontend-project-46/actions)
