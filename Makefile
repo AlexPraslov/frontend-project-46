@@ -9,3 +9,6 @@ test:
 
 test-watch:
 	npx jest --watch
+
+test-coverage:
+	node --experimental-vm-modules ./node_modules/.bin/jest --coverage --coverageReporters=lcov
