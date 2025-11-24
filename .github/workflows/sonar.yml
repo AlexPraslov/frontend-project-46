@@ -19,6 +19,7 @@ jobs:
             -Dsonar.projectKey=AlexPraslov_frontend-project-46
             -Dsonar.organization=alexpraslov
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.scm.disabled=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
