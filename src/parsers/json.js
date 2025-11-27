@@ -1,2 +1,2 @@
-const parseJSON = (data) => JSON.parse(data);
-export default parseJSON;
+const parseJSON = data => JSON.parse(data)
+export default parseJSON
