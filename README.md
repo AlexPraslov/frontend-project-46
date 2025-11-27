@@ -12,3 +12,7 @@
 ## SonarCloud
 
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexPraslov_frontend-project-46&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AlexPraslov_frontend-project-46)
+
+## Демонстрация работы с YAML
+
+[![asciicast](https://asciinema.org/a/H2UVLfSqy5WV8NHJ7mUWkBfKZ)](https://asciinema.org/a/H2UVLfSqy5WV8NHJ7mUWkBfKZ)
