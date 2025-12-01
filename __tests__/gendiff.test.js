@@ -48,3 +48,52 @@ test('JSON and YAML files produce identical diff', () => {
 
   expect(yamlResult).toEqual(jsonResult)
 })
+
+// НОВЫЕ ТЕСТЫ ДЛЯ ВЛОЖЕННЫХ СТРУКТУР
+test('nested JSON files comparison', () => {
+  const file1 = getFixturePath('nested1.json')
+  const file2 = getFixturePath('nested2.json')
+
+  const result = genDiff(file1, file2)
+
+  // Изменения из примера
+  expect(result).toContain('+ follow: false')
+  expect(result).toContain('- setting2: 200')
+  expect(result).toContain('- setting3: true')
+  expect(result).toContain('+ setting3: null')
+  expect(result).toContain('+ setting4: blah blah')
+  expect(result).toContain('+ setting5:')
+  expect(result).toContain('key5: value5')
+  expect(result).toContain('- wow:')
+  expect(result).toContain('+ wow: so much')
+  expect(result).toContain('- group2:')
+  expect(result).toContain('+ group3:')
+})
+
+test('nested YAML files comparison', () => {
+  const file1 = getFixturePath('nested1.yml')
+  const file2 = getFixturePath('nested2.yml')
+
+  const result = genDiff(file1, file2)
+
+  // Те же проверки что и для JSON
+  expect(result).toContain('+ follow: false')
+  expect(result).toContain('- setting2: 200')
+  expect(result).toContain('- setting3: true')
+  expect(result).toContain('+ setting3: null')
+  expect(result).toContain('+ setting4: blah blah')
+})
+
+test('nested JSON and YAML produce same structure', () => {
+  const json1 = getFixturePath('nested1.json')
+  const json2 = getFixturePath('nested2.json')
+  const yaml1 = getFixturePath('nested1.yml')
+  const yaml2 = getFixturePath('nested2.yml')
+
+  const jsonResult = genDiff(json1, json2)
+  const yamlResult = genDiff(yaml1, yaml2)
+
+  // Очищаем значения чтобы сравнить только структуру
+  const clean = str => str.replace(/\d+/g, 'X').replace(/".*?"/g, '"X"')
+  expect(clean(jsonResult)).toEqual(clean(yamlResult))
+})

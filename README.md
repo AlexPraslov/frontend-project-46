@@ -16,3 +16,7 @@
 ## Демонстрация работы с YAML
 
 [![asciicast](https://asciinema.org/a/H2UVLfSqy5WV8NHJ7mUWkBfKZ)](https://asciinema.org/a/H2UVLfSqy5WV8NHJ7mUWkBfKZ)
+
+## Демонстрация работы рекурсивного сравнения
+
+[![asciicast](https://asciinema.org/a/cneGLmO4QhtpKt42SRsQarDGk)](https://asciinema.org/a/cneGLmO4QhtpKt42SRsQarDGk)
