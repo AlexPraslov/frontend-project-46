@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import _ from 'lodash'
 import getDataFromFile from './src/parsers.js'
 import buildDiff from './src/diffBuilder.js'
 import format from './src/formatters/index.js'
@@ -14,21 +13,26 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   return format(diff, formatName)
 }
 
-// CLI
-const program = new Command()
+// Запускаем CLI ТОЛЬКО если файл вызван напрямую как скрипт
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const program = new Command()
 
-program
-  .name('gendiff')
-  .description('Compares two configuration files and shows a difference.')
-  .version('1.0.0')
-  .option('-f, --format <type>', 'output format', 'stylish')
-  .argument('<filepath1>')
-  .argument('<filepath2>')
-  .action((filepath1, filepath2, options) => {
-    const result = genDiff(filepath1, filepath2, options.format)
-    console.log(result)
-  })
+  program
+    .name('gendiff')
+    .description('Compares two configuration files and shows a difference.')
+    .version('1.0.0')
+    .option('-f, --format <type>', 'output format', 'stylish')
+    .argument('<filepath1>')
+    .argument('<filepath2>')
+    .action((filepath1, filepath2, options) => {
+      const result = genDiff(filepath1, filepath2, options.format)
+      console.log(result)
+    })
 
-program.parse()
+  // Разрешаем неизвестные опции (для Jest --coverage)
+  program.allowUnknownOption(true)
+
+  program.parse()
+}
 
 export default genDiff
