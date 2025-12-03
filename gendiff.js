@@ -1,41 +1,21 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import getDataFromFile from './src/parsers.js'
-import buildDiff from './src/diffBuilder.js'
-import format from './src/formatters/index.js'
+import genDiff from './src/index.js'
 
-// Основная функция (экспортируется для использования в коде)
-const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
-  const data1 = getDataFromFile(filepath1)
-  const data2 = getDataFromFile(filepath2)
-  const diff = buildDiff(data1, data2)
-  return format(diff, formatName)
-}
+const program = new Command()
 
-// CLI часть (только для запуска как скрипт)
-const runCLI = () => {
-  const program = new Command()
+program
+  .name('gendiff')
+  .description('Compares two configuration files and shows a difference.')
+  .version('1.0.0')
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .argument('<filepath1>')
+  .argument('<filepath2>')
+  .action((filepath1, filepath2, options) => {
+    const result = genDiff(filepath1, filepath2, options.format)
+    console.log(result)
+  })
 
-  program
-    .name('gendiff')
-    .description('Compares two configuration files and shows a difference.')
-    .version('1.0.0')
-    .option('-f, --format <type>', 'output format', 'stylish')
-    .argument('<filepath1>')
-    .argument('<filepath2>')
-    .action((filepath1, filepath2, options) => {
-      const result = genDiff(filepath1, filepath2, options.format)
-      console.log(result)
-    })
-
-  program.allowUnknownOption(true)
-  program.parse()
-}
-
-// Запускаем CLI только если файл вызван напрямую
-if (import.meta.url === `file://${process.argv[1]}`) {
-  runCLI()
-}
-
-export default genDiff
+program.allowUnknownOption(true)
+program.parse()
