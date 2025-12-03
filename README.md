@@ -20,3 +20,7 @@
 ## Демонстрация работы рекурсивного сравнения
 
 [![asciicast](https://asciinema.org/a/cneGLmO4QhtpKt42SRsQarDGk)](https://asciinema.org/a/cneGLmO4QhtpKt42SRsQarDGk)
+
+## Демонстрация работы Plain и Json форматтеров
+
+[![asciicast](https://asciinema.org/a/IJ5iz0nklyv1ohd38m3VxWab7)](https://asciinema.org/a/IJ5iz0nklyv1ohd38m3VxWab7)

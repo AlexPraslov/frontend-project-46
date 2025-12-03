@@ -13,8 +13,10 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   return format(diff, formatName)
 }
 
-// Запускаем CLI ТОЛЬКО если файл вызван напрямую как скрипт
-if (import.meta.url === `file://${process.argv[1]}`) {
+// Всегда запускаем CLI, но добавляем проверку на тесты
+const isCalledFromJest = process.argv.some(arg => arg.includes('jest'))
+
+if (!isCalledFromJest) {
   const program = new Command()
 
   program
@@ -29,9 +31,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       console.log(result)
     })
 
-  // Разрешаем неизвестные опции (для Jest --coverage)
   program.allowUnknownOption(true)
-
   program.parse()
 }
 
