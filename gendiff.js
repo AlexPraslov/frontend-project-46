@@ -5,7 +5,7 @@ import getDataFromFile from './src/parsers.js'
 import buildDiff from './src/diffBuilder.js'
 import format from './src/formatters/index.js'
 
-// Основная функция
+// Основная функция (экспортируется для использования в коде)
 const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = getDataFromFile(filepath1)
   const data2 = getDataFromFile(filepath2)
@@ -13,10 +13,8 @@ const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
   return format(diff, formatName)
 }
 
-// Всегда запускаем CLI, но добавляем проверку на тесты
-const isCalledFromJest = process.argv.some(arg => arg.includes('jest'))
-
-if (!isCalledFromJest) {
+// CLI часть (только для запуска как скрипт)
+const runCLI = () => {
   const program = new Command()
 
   program
@@ -33,6 +31,11 @@ if (!isCalledFromJest) {
 
   program.allowUnknownOption(true)
   program.parse()
+}
+
+// Запускаем CLI только если файл вызван напрямую
+if (import.meta.url === `file://${process.argv[1]}`) {
+  runCLI()
 }
 
 export default genDiff
