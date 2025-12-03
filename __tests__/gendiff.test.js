@@ -203,3 +203,69 @@ test('json format identical for JSON and YAML inputs', () => {
 
   expect(JSON.parse(jsonResult)).toEqual(JSON.parse(yamlResult))
 })
+
+// Тесты для JSON формата
+test('json format returns valid JSON', () => {
+  const file1 = getFixturePath('file1.json')
+  const file2 = getFixturePath('file2.json')
+  const result = genDiff(file1, file2, 'json')
+
+  // Проверяем что это валидный JSON
+  expect(() => JSON.parse(result)).not.toThrow()
+
+  const parsed = JSON.parse(result)
+  expect(Array.isArray(parsed)).toBe(true)
+})
+
+test('json format contains diff structure', () => {
+  const file1 = getFixturePath('nested1.json')
+  const file2 = getFixturePath('nested2.json')
+  const result = genDiff(file1, file2, 'json')
+
+  const parsed = JSON.parse(result)
+
+  // Проверяем наличие ключевых узлов
+  const hasCommon = parsed.some(node => node.key === 'common')
+  const hasGroup1 = parsed.some(node => node.key === 'group1')
+
+  expect(hasCommon).toBe(true)
+  expect(hasGroup1).toBe(true)
+})
+
+test('json format preserves all node types', () => {
+  const file1 = getFixturePath('file1.json')
+  const file2 = getFixturePath('file2.json')
+  const result = genDiff(file1, file2, 'json')
+
+  const parsed = JSON.parse(result)
+
+  // Должны быть все типы узлов
+  const types = parsed.map(node => node.type)
+  expect(types).toContain('removed')
+  expect(types).toContain('added')
+  expect(types).toContain('unchanged')
+})
+
+test('json format works with YAML files', () => {
+  const file1 = getFixturePath('nested1.yml')
+  const file2 = getFixturePath('nested2.yml')
+  const result = genDiff(file1, file2, 'json')
+
+  // Проверяем что это валидный JSON
+  expect(() => JSON.parse(result)).not.toThrow()
+
+  const parsed = JSON.parse(result)
+  expect(Array.isArray(parsed)).toBe(true)
+})
+
+test('json format identical for JSON and YAML inputs', () => {
+  const json1 = getFixturePath('nested1.json')
+  const json2 = getFixturePath('nested2.json')
+  const yaml1 = getFixturePath('nested1.yml')
+  const yaml2 = getFixturePath('nested2.yml')
+
+  const jsonResult = genDiff(json1, json2, 'json')
+  const yamlResult = genDiff(yaml1, yaml2, 'json')
+
+  expect(JSON.parse(jsonResult)).toEqual(JSON.parse(yamlResult))
+})

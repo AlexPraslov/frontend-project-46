@@ -1,8 +1,19 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander'
-import genDiff from './src/index.js'
+import getDataFromFile from './src/parsers.js'
+import buildDiff from './src/diffBuilder.js'
+import format from './src/formatters/index.js'
 
+// Основная функция
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+  const data1 = getDataFromFile(filepath1)
+  const data2 = getDataFromFile(filepath2)
+  const diff = buildDiff(data1, data2)
+  return format(diff, formatName)
+}
+
+// CLI запускается всегда
 const program = new Command()
 
 program
@@ -18,4 +29,10 @@ program
   })
 
 program.allowUnknownOption(true)
-program.parse()
+
+// Запускаем только если есть аргументы (для тестов)
+if (process.argv.length > 2) {
+  program.parse()
+}
+
+export default genDiff
