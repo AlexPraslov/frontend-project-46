@@ -24,3 +24,7 @@
 ## Демонстрация работы Plain и Json форматтеров
 
 [![asciicast](https://asciinema.org/a/IJ5iz0nklyv1ohd38m3VxWab7)](https://asciinema.org/a/IJ5iz0nklyv1ohd38m3VxWab7)
+
+## Демонстрация работы всех форматов вывода
+
+[![asciicast](https://asciinema.org/a/7la8HG9Npbqpi85XF8Ix2wZzq)](https://asciinema.org/a/7la8HG9Npbqpi85XF8Ix2wZzq)
